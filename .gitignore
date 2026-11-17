@@ -1,0 +1,8 @@
+# Entorno virtual de Python
+venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Datos crudos y procesados (archivos pesados)
+data/raw/
+data/processed/
