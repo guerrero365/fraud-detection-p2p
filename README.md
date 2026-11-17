@@ -67,7 +67,8 @@ humanos de fraude al reducir el volumen de falsos positivos.
 
 ## 📥 Obtención de Datos
 ```text
-Este repositorio no incluye los archivos de datos crudos debido a su volumen (más de 6 millones de registros). Para replicar el pipeline:
+Este repositorio no incluye los archivos de datos crudos debido a su volumen (más de 6 millones de registros).
+Para replicar el pipeline:
 1. Descarga el dataset **PaySim1** desde [Kaggle](https://www.kaggle.com/datasets/ealaxi/paysim1).
 2. Coloca el archivo CSV resultante dentro de la ruta local `data/data/raw/`.
 ```
