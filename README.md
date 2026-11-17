@@ -9,8 +9,8 @@
 ---
 
 ## 🏗️ Arquitectura del Proyecto
-El repositorio implementa una separación limpia entre la lógica de producción modular y la exploración analítica:
 ```text
+El repositorio implementa una separación limpia entre la lógica de producción modular y la exploración analítica:
 fraud-detection-p2p/
 ├── data/data/raw/       # Dataset sintético PaySim (excluido del control de versiones)
 ├── docs/                # Documentación técnica de preprocesamiento
@@ -19,8 +19,9 @@ fraud-detection-p2p/
 ├── .gitignore           # Configuración de exclusión de archivos pesados
 ├── requirements.txt     # Dependencias del proyecto
 └── README.md            # Documentación principal
-
-📊 Metodología y Hallazgos del EDA
+```
+### 📊 Metodología y Hallazgos del EDA
+```text
 Auditoría de Calidad: Verificación de integridad estructural sobre más de 6 millones de
 registros del dataset PaySim.
 
@@ -33,8 +34,9 @@ delatar inconsistencias en los saldos de origen y destino:
 errorBalanceOrig = newbalanceOrig + amount - oldbalanceOrig
 
 errorBalanceDest = oldbalanceDest + amount - newbalanceDest
-
-🎯 Resultados del Modelo y Justificación de Métricas
+```
+### 🎯 Resultados del Modelo y Justificación de Métricas
+```text
 En problemas de fraude financiero con desbalanceo extremo, la métrica de Accuracy (Exactitud)
 resulta totalmente engañosa (un modelo ingenuo que prediga "todo legítimo" tendría 99.8% de
 accuracy pero cero utilidad). Por ello, evaluamos el desempeño bajo estrictas métricas
@@ -48,14 +50,16 @@ reales. Esto evita inundar al equipo de operaciones con falsas alarmas masivas.
 
 F1-Score (0.9520): Confirma un balance excepcional entre la sensibilidad del modelo y su
 precisión predictiva.
-
-💼 Impacto en el Negocio (Fintech)
+```
+### 💼 Impacto en el Negocio (Fintech)
+```text
 Mitigación de Pérdidas Directas: Un alto Recall previene que transacciones maliciosas salgan
 de la plataforma, evitando costos de devolución y sanciones regulatorias.
 
 Experiencia de Usuario (UX) Protegida: Una alta Precision evita bloquear las cuentas o
 transacciones de clientes legítimos por error, reduciendo la fricción y la frustración del
 usuario final en la pasarela de pagos.
+
 
 Eficiencia Operativa: Minimiza los costos de revisión manual por parte de los analistas
 humanos de fraude al reducir el volumen de falsos positivos.
