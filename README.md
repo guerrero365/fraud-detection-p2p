@@ -1,31 +1,48 @@
 # 🛡️ P2P Financial Fraud Detection Pipeline
 
-Pipeline modular de Machine Learning de grado de producción diseñado para la detección de fraude en transacciones de pagos peer-to-peer (P2P), utilizando el dataset sintético **PaySim**. El proyecto prioriza la arquitectura de código limpio, la reproducibilidad y métricas de rendimiento orientadas al negocio financiero.
+## 📌 Overview (Resumen Ejecutivo)
+* **Problema:** Las transacciones financieras digitales P2P son altamente vulnerables al fraude, el cual suele camuflarse entre millones de operaciones legítimas (<0.2% de incidencia real).
+* **Objetivo:** Diseñar y desplegar un pipeline de Machine Learning de grado de producción capaz de identificar operaciones fraudulentas en tiempo real con alta precisión y mínima fricción operativa.
+* **Tecnologías:** Python, Pandas, Scikit-Learn, XGBoost, Jupyter, Git, PowerShell.
+* **Principal Resultado:** Un modelo XGBoost optimizado que alcanzó un **Recall del 99.63%** y una **Precision del 91.15%**, garantizando un blindaje financiero efectivo.
 
 ---
 
 ## 🏗️ Arquitectura del Proyecto
-
-El repositorio está estructurado siguiendo las mejores prácticas de ingeniería de software para Ciencia de Datos, separando la lógica de producción (`src/`) de la exploración interactiva (`notebooks/`):
-
+El repositorio implementa una separación limpia entre la lógica de producción modular y la exploración analítica:
 ```text
 fraud-detection-p2p/
-│
-├── data/
-│   └── raw/                   # Dataset original (PaySim)
-│
-├── docs/                      # Documentación técnica y guías detalladas
-│   └── preprocessing_guide.md # Documentación del preprocesamiento
-│
-├── notebooks/                 # Cuadernos Jupyter interactivos
-│   ├── 01_eda_and_insights.ipynb         # Análisis Exploratorio y Auditoría
-│   └── 02_modeling_and_pipeline.ipynb    # Pipeline de Modelado y Evaluación
-│
-├── src/                       # Código modular de producción
-│   ├── data_loader.py         # Módulo de ingesta y carga de datos
-│   ├── preprocessing.py       # Modificación, filtrado e ingeniería de features
-│   └── train.py               # Estructuras de preparación de datos para ML
-│
-├── .gitignore                 # Archivos excluidos del control de versiones
-├── requirements.txt           # Dependencias del entorno de desarrollo
-└── README.md                  # Documentación principal del proyecto
+├── data/data/raw/             # Dataset sintético PaySim (excluido del control de versiones)
+├── docs/                      # Documentación técnica de preprocesamiento
+├── notebooks/                 # Cuadernos interactivos (EDA y Modelado)
+├── src/                       # Código modular de producción (data_loader, preprocessing, train)
+├── .gitignore                 # Configuración de exclusión de archivos pesados
+├── requirements.txt           # Dependencias del proyecto
+└── README.md                  # Documentación principal
+
+📊 Metodología y Hallazgos del EDA
+Auditoría de Calidad: Verificación de integridad estructural sobre más de 6 millones de registros del dataset PaySim.
+
+Filtrado Operativo: Se aisló el análisis exclusivamente en los canales de riesgo real (TRANSFER y CASH_OUT), descartando canales sin incidencia de fraude (PAYMENT, CASH_IN, DEBIT).
+
+Ingeniería de Características: Creación de variables de discrepancia financiera para delatar inconsistencias en los saldos de origen y destino:
+
+errorBalanceOrig = newbalanceOrig + amount - oldbalanceOrg
+
+errorBalanceDest = oldbalanceDest + amount - newbalanceDest
+
+🎯 Resultados del Modelo y Justificación de Métricas
+En problemas de fraude financiero con desbalanceo extremo, la métrica de Accuracy (Exactitud) resulta totalmente engañosa (un modelo ingenuo que prediga "todo legítimo" tendría 99.8% de accuracy pero cero utilidad). Por ello, evaluamos el desempeño bajo estrictas métricas orientadas a negocio:
+
+Recall (99.63%): De cada 1,000 fraudes reales, el modelo atrapa a 996. Esto mitiga drásticamente el riesgo de pérdidas financieras por estafas no detectadas.
+
+Precision (91.15%): De cada 100 alertas generadas por el sistema, más de 91 son fraudes reales. Esto evita inundar al equipo de operaciones con falsas alarmas masivas.
+
+F1-Score (0.9520): Confirma un balance excepcional entre la sensibilidad del modelo y su precisión predictiva.
+
+💼 Impacto en el Negocio (Fintech)
+Mitigación de Pérdidas Directas: Un alto Recall previene que transacciones maliciosas salgan de la plataforma, evitando costos de devolución y sanciones regulatorias.
+
+Experiencia de Usuario (UX) Protegida: Una alta Precision evita bloquear las cuentas o transacciones de clientes legítimos por error, reduciendo la fricción y la frustración del usuario final en la pasarela de pagos.
+
+Eficiencia Operativa: Minimiza los costos de revisión manual por parte de los analistas humanos de fraude al reducir el volumen de falsos positivos.
