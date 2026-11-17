@@ -12,7 +12,7 @@
 ```text
 El repositorio implementa una separación limpia entre la lógica de producción modular y la exploración analítica:
 fraud-detection-p2p/
-├── data/data/raw/       # Dataset sintético PaySim (excluido del control de versiones)
+├── data/data/raw/       # Dataset sintético PaySim (Descargar de Kaggle: https://www.kaggle.com/datasets/ealaxi/paysim1)
 ├── docs/                # Documentación técnica de preprocesamiento
 ├── notebooks/           # Cuadernos interactivos (EDA y Modelado)
 ├── src/                 # Código modular de producción (data_loader, preprocessing, train)
@@ -63,4 +63,11 @@ usuario final en la pasarela de pagos.
 
 Eficiencia Operativa: Minimiza los costos de revisión manual por parte de los analistas
 humanos de fraude al reducir el volumen de falsos positivos.
+```
+
+## 📥 Obtención de Datos
+```text
+Este repositorio no incluye los archivos de datos crudos debido a su volumen (más de 6 millones de registros). Para replicar el pipeline:
+1. Descarga el dataset **PaySim1** desde [Kaggle](https://www.kaggle.com/datasets/ealaxi/paysim1).
+2. Coloca el archivo CSV resultante dentro de la ruta local `data/data/raw/`.
 ```
